@@ -1,6 +1,7 @@
 package com.example.a43externalstorage;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -40,5 +41,18 @@ public class MainActivity extends AppCompatActivity {
 
     private void read() {
         // Implementation for reading from external storage
+    }
+
+    //Hace falta en api36
+    public boolean isExternalStorageWritable() {
+       String state = Environment.getExternalStorageState();
+       return Environment.MEDIA_MOUNTED.equals(state);
+    }
+
+    //Hace falta en api36
+    public boolean isExternalStorageReadable() {
+         String state = Environment.getExternalStorageState();
+         return Environment.MEDIA_MOUNTED.equals(state) ||
+                  Environment.MEDIA_MOUNTED_READ_ONLY.equals(state);
     }
 }
