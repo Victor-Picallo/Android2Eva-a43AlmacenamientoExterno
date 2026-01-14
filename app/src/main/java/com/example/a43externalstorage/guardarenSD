@@ -1,0 +1,27 @@
+ public void guardarArchivoEnSD() {
+        // 1. Obtener la ruta de la "SD Card" (Almacenamiento externo propio de la app)
+        // Esto crea la ruta: /sdcard/Android/data/tu.paquete/files/misFicheros
+        File folder = new File(getExternalFilesDir(null), "misFicheros");
+
+        // 2. Verificar si la carpeta existe, si no, crearla
+        if (!folder.exists()) {
+            if (folder.mkdirs()) {
+                System.out.println("Carpeta creada con éxito");
+            } else {
+                System.out.println("Error al crear la carpeta");
+                return;
+            }
+        }
+
+        // 3. Crear el objeto File para el archivo dentro de esa carpeta
+        File file = new File(folder, "prueba.txt");
+
+        // 4. Escribir el contenido en el fichero
+        try (FileWriter writer = new FileWriter(file)) {
+            writer.append("Este es el contenido de mi archivo de prueba.");
+            writer.flush();
+            System.out.println("Archivo guardado en: " + file.getAbsolutePath());
+        } catch (IOException e) {
+            System.err.println("Error al escribir el archivo: " + e.getMessage());
+        }
+    }
